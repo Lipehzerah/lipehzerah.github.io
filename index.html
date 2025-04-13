@@ -1,85 +1,185 @@
-
 <!DOCTYPE html>
 <html lang="pt">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Busca Descontos</title>
+  <title>BuscaDescontos - Pesquise e Economize</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" />
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f8f8f8;
+      font-family: 'Roboto', sans-serif;
       margin: 0;
       padding: 0;
-      text-align: center;
+      background-color: #f5f5f5;
     }
     header {
-      background-color: #4CAF50;
-      padding: 20px;
+      background-color: #003366;
       color: white;
+      padding: 1rem;
+      text-align: center;
     }
-    main {
-      padding: 20px;
+    .search-container {
+      padding: 2rem;
+      text-align: center;
     }
     input[type="text"] {
+      padding: 1rem;
       width: 80%;
-      padding: 10px;
-      font-size: 16px;
-      margin: 20px 0;
+      max-width: 600px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
     }
     button {
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
-      background-color: #4CAF50;
+      padding: 1rem 2rem;
+      margin-left: 0.5rem;
+      font-size: 1rem;
+      background-color: #007bff;
       color: white;
       border: none;
+      border-radius: 8px;
+      cursor: pointer;
     }
-    footer {
-      margin-top: 50px;
-      color: #666;
+    .categories, .history, .lang-select {
+      margin: 1rem auto;
+      max-width: 800px;
+      text-align: center;
+    }
+    .category, .history-item {
+      display: inline-block;
+      background-color: #ddd;
+      margin: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+    .ads {
+      margin: 2rem auto;
+      max-width: 728px;
+      text-align: center;
     }
   </style>
+
+  <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3944571997717470"
      crossorigin="anonymous"></script>
 </head>
 <body>
+
   <header>
-    <h1>Busca Descontos</h1>
-    <p>Compare preços de forma simples e rápida</p>
+    <h1 id="title">BuscaDescontos</h1>
+    <p id="subtitle">Compare preços e economize de verdade!</p>
   </header>
 
-  <main>
-    <input type="text" id="searchInput" placeholder="Digite o que deseja buscar..." />
-    <br />
-    <button onclick="searchProduct()">Buscar</button>
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Digite o nome do produto..." />
+    <button onclick="search()">Buscar</button>
+  </div>
 
-    <!-- AdSense Banner -->
-    <div style="margin-top: 30px;">
-      <ins class="adsbygoogle"
-        style="display:block"
-        data-ad-client="ca-pub-3944571997717470"
-        data-ad-slot="3785423066"
-        data-ad-format="auto"
-        data-full-width-responsive="true"></ins>
-      <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
-    </div>
-  </main>
+  <div class="categories" id="categories">
+    <span class="category" onclick="quickSearch('Celular')">📱 Celulares</span>
+    <span class="category" onclick="quickSearch('Notebook')">💻 Notebooks</span>
+    <span class="category" onclick="quickSearch('TV')">📺 TVs</span>
+    <span class="category" onclick="quickSearch('Geladeira')">🧊 Geladeiras</span>
+    <span class="category" onclick="quickSearch('Tênis')">👟 Tênis</span>
+  </div>
 
-  <footer>
-    <p>&copy; 2025 Busca Descontos - Todos os direitos reservados</p>
-  </footer>
+  <div class="ads">
+    <!-- Ad Banner -->
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3944571997717470"
+         data-ad-slot="3785423066"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+
+  <div class="history" id="history">
+    <h3>🔍 Histórico de Pesquisa</h3>
+  </div>
+
+  <div class="lang-select">
+    🌐 <label for="language">Idioma:</label>
+    <select id="language" onchange="changeLanguage(this.value)">
+      <option value="pt">Português</option>
+      <option value="en">English</option>
+      <option value="es">Español</option>
+    </select>
+  </div>
 
   <script>
-    function searchProduct() {
-      const query = document.getElementById("searchInput").value;
-      if (query) {
-        const encoded = encodeURIComponent(query);
-        window.open(`https://www.google.com/search?q=${encoded}+preço`, "_blank");
-      }
+    function search(query = null) {
+      const input = document.getElementById("searchInput");
+      const term = query || input.value;
+      if (!term.trim()) return;
+
+      saveHistory(term);
+      window.open(`https://www.google.com/search?q=${encodeURIComponent(term)}+site:magazineluiza.com.br OR site:shopee.com.br OR site:amazon.com.br`, '_blank');
     }
+
+    function quickSearch(term) {
+      document.getElementById("searchInput").value = term;
+      search(term);
+    }
+
+    function saveHistory(term) {
+      let history = JSON.parse(localStorage.getItem("history") || "[]");
+      if (!history.includes(term)) {
+        history.unshift(term);
+        if (history.length > 10) history.pop();
+        localStorage.setItem("history", JSON.stringify(history));
+      }
+      renderHistory();
+    }
+
+    function renderHistory() {
+      const history = JSON.parse(localStorage.getItem("history") || "[]");
+      const container = document.getElementById("history");
+      container.innerHTML = "<h3>🔍 Histórico de Pesquisa</h3>";
+      history.forEach(term => {
+        const item = document.createElement("span");
+        item.className = "history-item";
+        item.innerText = term;
+        item.onclick = () => search(term);
+        container.appendChild(item);
+      });
+    }
+
+    function changeLanguage(lang) {
+      const texts = {
+        pt: {
+          title: "BuscaDescontos",
+          subtitle: "Compare preços e economize de verdade!",
+          placeholder: "Digite o nome do produto...",
+          historyTitle: "🔍 Histórico de Pesquisa"
+        },
+        en: {
+          title: "DiscountFinder",
+          subtitle: "Compare prices and save money!",
+          placeholder: "Enter product name...",
+          historyTitle: "🔍 Search History"
+        },
+        es: {
+          title: "BuscadorDeDescuentos",
+          subtitle: "¡Compara precios y ahorra!",
+          placeholder: "Escribe el nombre del producto...",
+          historyTitle: "🔍 Historial de Búsqueda"
+        }
+      };
+
+      const t = texts[lang];
+      document.getElementById("title").innerText = t.title;
+      document.getElementById("subtitle").innerText = t.subtitle;
+      document.getElementById("searchInput").placeholder = t.placeholder;
+      document.getElementById("history").querySelector("h3").innerText = t.historyTitle;
+    }
+
+    // Inicializar
+    renderHistory();
   </script>
+
 </body>
 </html>
