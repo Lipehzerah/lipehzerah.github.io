@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Busca Descontos</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 20px; }
+    h1 { color: #333; }
+    .container { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 10px; }
+    input[type="text"] { width: 100%; padding: 10px; margin-top: 10px; font-size: 16px; }
+    button { padding: 10px 15px; font-size: 16px; background: #007bff; color: white; border: none; margin-top: 10px; cursor: pointer; }
+    button:hover { background: #0056b3; }
+    .ads { margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔍 Busca Descontos</h1>
+    <p>Encontre os melhores preços em várias lojas online!</p>
+    <input type="text" id="searchInput" placeholder="Ex: celular, fone de ouvido, notebook..." />
+    <button onclick="search()">Buscar</button>
+
+    <div class="ads">
+      <!-- Google AdSense -->
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3944571997717470" crossorigin="anonymous"></script>
+      <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-3944571997717470"
+        data-ad-slot="3785423066"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+  </div>
+
+  <script>
+    function search() {
+      const query = document.getElementById("searchInput").value;
+      if (!query) return alert("Digite algo para buscar!");
+      const formatted = encodeURIComponent(query);
+      window.open(`https://www.google.com/search?q=${formatted}+site:zoom.com.br+OR+site:magazineluiza.com.br+OR+site:shopee.com.br`, "_blank");
+    }
+  </script>
+</body>
+</html>
