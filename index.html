@@ -6,41 +6,79 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Busca Descontos</title>
   <style>
-    body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 20px; }
-    h1 { color: #333; }
-    .container { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 10px; }
-    input[type="text"] { width: 100%; padding: 10px; margin-top: 10px; font-size: 16px; }
-    button { padding: 10px 15px; font-size: 16px; background: #007bff; color: white; border: none; margin-top: 10px; cursor: pointer; }
-    button:hover { background: #0056b3; }
-    .ads { margin-top: 20px; }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f8f8;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    header {
+      background-color: #4CAF50;
+      padding: 20px;
+      color: white;
+    }
+    main {
+      padding: 20px;
+    }
+    input[type="text"] {
+      width: 80%;
+      padding: 10px;
+      font-size: 16px;
+      margin: 20px 0;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+    }
+    footer {
+      margin-top: 50px;
+      color: #666;
+    }
   </style>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3944571997717470"
+     crossorigin="anonymous"></script>
 </head>
 <body>
-  <div class="container">
-    <h1>🔍 Busca Descontos</h1>
-    <p>Encontre os melhores preços em várias lojas online!</p>
-    <input type="text" id="searchInput" placeholder="Ex: celular, fone de ouvido, notebook..." />
-    <button onclick="search()">Buscar</button>
+  <header>
+    <h1>Busca Descontos</h1>
+    <p>Compare preços de forma simples e rápida</p>
+  </header>
 
-    <div class="ads">
-      <!-- Google AdSense -->
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3944571997717470" crossorigin="anonymous"></script>
+  <main>
+    <input type="text" id="searchInput" placeholder="Digite o que deseja buscar..." />
+    <br />
+    <button onclick="searchProduct()">Buscar</button>
+
+    <!-- AdSense Banner -->
+    <div style="margin-top: 30px;">
       <ins class="adsbygoogle"
         style="display:block"
         data-ad-client="ca-pub-3944571997717470"
         data-ad-slot="3785423066"
         data-ad-format="auto"
         data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
     </div>
-  </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Busca Descontos - Todos os direitos reservados</p>
+  </footer>
 
   <script>
-    function search() {
+    function searchProduct() {
       const query = document.getElementById("searchInput").value;
-      if (!query) return alert("Digite algo para buscar!");
-      const formatted = encodeURIComponent(query);
-      window.open(`https://www.google.com/search?q=${formatted}+site:zoom.com.br+OR+site:magazineluiza.com.br+OR+site:shopee.com.br`, "_blank");
+      if (query) {
+        const encoded = encodeURIComponent(query);
+        window.open(`https://www.google.com/search?q=${encoded}+preço`, "_blank");
+      }
     }
   </script>
 </body>
