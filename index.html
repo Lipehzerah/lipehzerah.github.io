@@ -1,87 +1,70 @@
 
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Busque produtos com desconto e veja os melhores preços do mercado.">
-    <meta name="keywords" content="descontos, produtos baratos, buscador, preços, promoções">
-    <meta name="author" content="LipehZerah">
-    <title>Busca Descontos - Encontre os melhores preços!</title>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3944571997717470"
-        crossorigin="anonymous"></script>
-    <style>
-        body { font-family: Arial, sans-serif; padding: 20px; background: #f9f9f9; }
-        h1 { color: #333; }
-        .search-history, .ratings { margin-top: 20px; }
-        .star { cursor: pointer; font-size: 24px; color: gray; }
-        .star.selected { color: gold; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Busca Descontos - Encontre os melhores preços com facilidade!">
+  <meta name="keywords" content="descontos, produtos baratos, ofertas, comparação de preços, cupons">
+  <meta name="author" content="Lipehzerah">
+  <title>Busca Descontos</title>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3944571997717470"
+     crossorigin="anonymous"></script>
+
+  <!-- Styling -->
+  <style>
+    body { font-family: Arial, sans-serif; background: #f9f9f9; margin: 0; padding: 20px; }
+    h1 { color: #333; }
+    input[type="text"] { width: 80%; padding: 10px; font-size: 16px; }
+    button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+    .history { margin-top: 20px; }
+  </style>
 </head>
 <body>
-    <h1>🔍 Busca Descontos</h1>
-    <input type="text" id="searchInput" placeholder="O que você quer encontrar hoje?" style="width: 100%; padding: 10px;">
-    <button onclick="searchProduct()">Buscar</button>
+  <h1>🔎 Busca Descontos</h1>
+  <input type="text" id="searchBox" placeholder="Digite o produto...">
+  <button onclick="search()">Pesquisar</button>
 
-    <div class="search-history">
-        <h3>🕓 Suas últimas buscas:</h3>
-        <ul id="historyList"></ul>
-    </div>
+  <div class="history">
+    <h2>🕘 Histórico de Pesquisa</h2>
+    <ul id="historyList"></ul>
+  </div>
 
-    <div class="ratings">
-        <h3>⭐ Avalie um produto</h3>
-        <div id="stars">
-            <span class="star" onclick="rate(1)">★</span>
-            <span class="star" onclick="rate(2)">★</span>
-            <span class="star" onclick="rate(3)">★</span>
-            <span class="star" onclick="rate(4)">★</span>
-            <span class="star" onclick="rate(5)">★</span>
-        </div>
-    </div>
+  <!-- Ad Slot -->
+  <ins class="adsbygoogle"
+       style="display:block; margin-top:20px;"
+       data-ad-client="ca-pub-3944571997717470"
+       data-ad-slot="3785423066"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 
-    <!-- AdSense banner -->
-    <ins class="adsbygoogle"
-        style="display:block"
-        data-ad-client="ca-pub-3944571997717470"
-        data-ad-slot="3785423066"
-        data-ad-format="auto"
-        data-full-width-responsive="true"></ins>
-    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  <script>
+    function search() {
+      const query = document.getElementById("searchBox").value;
+      if (!query) return;
+      window.open(`https://www.google.com/search?q=${encodeURIComponent(query)} site:magazineluiza.com.br`, '_blank');
 
-    <script>
-        const input = document.getElementById("searchInput");
-        const historyList = document.getElementById("historyList");
-        const stars = document.querySelectorAll(".star");
+      let history = JSON.parse(localStorage.getItem("searchHistory") || "[]");
+      history.unshift(query);
+      localStorage.setItem("searchHistory", JSON.stringify(history.slice(0, 10)));
+      renderHistory();
+    }
 
-        function searchProduct() {
-            const term = input.value.trim();
-            if (!term) return;
-            let history = JSON.parse(localStorage.getItem("searchHistory")) || [];
-            history.unshift(term);
-            history = [...new Set(history)].slice(0, 5); // remove duplicatas, limite de 5
-            localStorage.setItem("searchHistory", JSON.stringify(history));
-            updateHistory();
-            window.open("https://www.google.com/search?q=" + encodeURIComponent(term), "_blank");
-        }
+    function renderHistory() {
+      let history = JSON.parse(localStorage.getItem("searchHistory") || "[]");
+      let list = document.getElementById("historyList");
+      list.innerHTML = "";
+      history.forEach(item => {
+        let li = document.createElement("li");
+        li.textContent = item;
+        list.appendChild(li);
+      });
+    }
 
-        function updateHistory() {
-            const history = JSON.parse(localStorage.getItem("searchHistory")) || [];
-            historyList.innerHTML = "";
-            history.forEach(item => {
-                const li = document.createElement("li");
-                li.textContent = item;
-                historyList.appendChild(li);
-            });
-        }
-
-        function rate(n) {
-            stars.forEach((star, i) => {
-                star.classList.toggle("selected", i < n);
-            });
-            alert(`Obrigado por avaliar com ${n} estrela(s)!`);
-        }
-
-        window.onload = updateHistory;
-    </script>
+    renderHistory();
+  </script>
 </body>
 </html>
