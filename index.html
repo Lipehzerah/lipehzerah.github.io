@@ -2,18 +2,41 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Busca Descontos</title>
-    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Busque produtos com o melhor preço. Compare lojas como Amazon, Shopee e Magazine Luiza.">
+    <meta name="keywords" content="busca, produtos, descontos, amazon, shopee, magazine luiza">
+    <meta name="author" content="Buscadescontos">
+    <title>BuscaDescontos</title>
+    <link rel="stylesheet" href="style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3944571997717470" crossorigin="anonymous"></script>
 </head>
 <body>
-    <h1>Busca Descontos</h1>
-    <input type="text" id="search-input" placeholder="Digite o produto" />
-    <button onclick="searchProduct()">Buscar</button>
-
-    <div id="results"></div>
-
+    <header>
+        <h1>🛒 BuscaDescontos</h1>
+        <p>Encontre o melhor preço nas maiores lojas do Brasil!</p>
+    </header>
+    <main>
+        <div class="search-box">
+            <input type="text" id="search-input" placeholder="O que você está procurando?">
+            <button onclick="searchProduct()">Buscar</button>
+        </div>
+        <div id="adsense-box">
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-3944571997717470"
+                data-ad-slot="3785423066"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        <div id="results"></div>
+    </main>
+    <footer>
+        <p>&copy; 2025 BuscaDescontos - Todos os direitos reservados.</p>
+    </footer>
     <script src="script.js"></script>
 </body>
 </html>
