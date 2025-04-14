@@ -1,0 +1,29 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+header {
+  background: #3f51b5;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+input, select, button {
+  margin: 10px;
+  padding: 10px;
+  font-size: 1rem;
+}
+main, section {
+  padding: 20px;
+  margin: 10px;
+  background: white;
+  border-radius: 8px;
+}
+#reviewDisplay div {
+  margin-top: 10px;
+  background: #e0e0e0;
+  padding: 10px;
+  border-radius: 5px;
+}
