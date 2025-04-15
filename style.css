@@ -1,78 +1,67 @@
-
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #e6f4ea;
-    margin: 0;
-    padding: 0;
-    text-align: center;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #e8f5e9;
+  color: #1b5e20;
 }
 
-.container {
-    max-width: 800px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+header {
+  background-color: #1b5e20;
+  color: white;
+  padding: 20px;
+  text-align: center;
 }
 
-h1 {
-    color: #2e7d32;
+main {
+  padding: 20px;
 }
 
-.search-box {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
+.search-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
 }
 
-#searchInput {
-    width: 70%;
-    padding: 10px;
-    font-size: 16px;
-    border: 2px solid #2e7d32;
-    border-radius: 8px 0 0 8px;
+.search-container input {
+  width: 300px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px 0 0 8px;
+  border: 2px solid #1b5e20;
 }
 
-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #2e7d32;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 0 8px 8px 0;
+.search-container button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #43a047;
+  color: white;
+  border: none;
+  border-radius: 0 8px 8px 0;
+  cursor: pointer;
 }
 
-button:hover {
-    background-color: #1b5e20;
+.search-container button:hover {
+  background-color: #2e7d32;
 }
 
-#results {
-    margin-top: 30px;
+.results {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.result-item {
+  padding: 10px;
+  background-color: white;
+  border: 1px solid #c8e6c9;
+  border-radius: 8px;
 }
 
 footer {
-    margin-top: 50px;
-    font-size: 14px;
-    color: #555;
-}
-
-#historyList {
-    list-style: none;
-    padding: 0;
-    margin-top: 10px;
-}
-
-#historyList li {
-    background: #c8e6c9;
-    margin: 5px auto;
-    padding: 5px;
-    width: 70%;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.hidden {
-    display: none;
+  margin-top: 40px;
+  text-align: center;
+  padding: 20px;
+  background-color: #1b5e20;
+  color: white;
 }

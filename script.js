@@ -1,44 +1,26 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const input = document.getElementById("searchInput");
+  const button = document.getElementById("searchBtn");
+  const resultsDiv = document.getElementById("results");
 
-function search() {
-    const input = document.getElementById("searchInput");
-    const query = input.value.trim();
-    if (!query) return;
+  const search = () => {
+    const term = input.value.trim();
+    if (!term) return;
 
-    saveToHistory(query);
-    const searchURL = `https://www.google.com/search?q=${encodeURIComponent(query)}+site:amazon.com.br+OR+site:mercadolivre.com.br+OR+site:shopee.com.br+OR+site:magazineluiza.com.br+preço`;
-    window.open(searchURL, "_blank");
-}
+    resultsDiv.innerHTML = '<p>Buscando resultados, aguarde...</p>';
+    const query = \`\${term} site:amazon.com.br OR site:magazineluiza.com.br OR site:mercadolivre.com.br preço\`;
 
-document.getElementById("searchInput").addEventListener("keypress", function(e) {
-    if (e.key === "Enter") search();
-});
+    window.open("https://www.google.com/search?q=" + encodeURIComponent(query), "_blank");
 
-function saveToHistory(query) {
-    let history = JSON.parse(localStorage.getItem("searchHistory")) || [];
-    if (!history.includes(query)) {
-        history.unshift(query);
-        if (history.length > 10) history.pop();
-        localStorage.setItem("searchHistory", JSON.stringify(history));
+    const history = JSON.parse(localStorage.getItem("searchHistory") || "[]");
+    if (!history.includes(term)) {
+      history.push(term);
+      localStorage.setItem("searchHistory", JSON.stringify(history));
     }
-}
+  };
 
-function showHistory() {
-    const historyList = document.getElementById("historyList");
-    const history = JSON.parse(localStorage.getItem("searchHistory")) || [];
-    historyList.innerHTML = "";
-    history.forEach(item => {
-        const li = document.createElement("li");
-        li.textContent = item;
-        li.onclick = () => {
-            document.getElementById("searchInput").value = item;
-            search();
-        };
-        historyList.appendChild(li);
-    });
-    historyList.classList.remove("hidden");
-}
-
-function clearHistory() {
-    localStorage.removeItem("searchHistory");
-    document.getElementById("historyList").classList.add("hidden");
-}
+  button.addEventListener("click", search);
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") search();
+  });
+});
