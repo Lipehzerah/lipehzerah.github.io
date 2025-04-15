@@ -1,27 +1,43 @@
 
-function searchProduct() {
-    const input = document.getElementById('search-input').value.trim();
-    const resultsBox = document.getElementById('results');
-    resultsBox.innerHTML = "";
+document.addEventListener("DOMContentLoaded", function() {
+    const searchInput = document.getElementById("searchInput");
+    const searchButton = document.getElementById("searchButton");
 
-    if (!input) {
-        resultsBox.innerHTML = "<p>Por favor, digite um produto.</p>";
-        return;
+    const products = [
+        { loja: "Amazon", preco: 2050, nota: 3.5, link: "https://www.amazon.com.br" },
+        { loja: "Shopee", preco: 1999, nota: 4.0, link: "https://shopee.com.br" },
+        { loja: "Americanas", preco: 2150, nota: 4.2, link: "https://www.americanas.com.br" },
+        { loja: "Magalu", preco: 2020, nota: 4.6, link: "https://www.magazineluiza.com.br" },
+        { loja: "Submarino", preco: 1989, nota: 3.9, link: "https://www.submarino.com.br" },
+    ];
+
+    function renderResults(term) {
+        const resultsDiv = document.getElementById("results");
+        resultsDiv.innerHTML = "";
+
+        products.forEach(prod => {
+            const div = document.createElement("div");
+            div.className = "result-item";
+            div.innerHTML = `
+                <h2>${term} - Oferta ${prod.loja}</h2>
+                <p>R$ ${prod.preco.toFixed(2).replace(".", ",")}</p>
+                <p class="stars">${"★".repeat(Math.floor(prod.nota)) + "☆".repeat(5 - Math.floor(prod.nota))} (${prod.nota.toFixed(1)}/5)</p>
+                <a href="${prod.link}" target="_blank">Ver produto</a>
+            `;
+            resultsDiv.appendChild(div);
+        });
     }
 
-    // Simulated product result
-    resultsBox.innerHTML = `
-        <div class="product">
-            <h3>${input} - Oferta Shopee</h3>
-            <p>R$ 1.999,00</p>
-            <div>⭐⭐⭐⭐☆ (4/5)</div>
-            <a href="https://www.google.com/search?q=${encodeURIComponent(input)}" target="_blank">Ver produto</a>
-        </div>
-        <div class="product">
-            <h3>${input} - Oferta Amazon</h3>
-            <p>R$ 2.050,00</p>
-            <div>⭐⭐⭐☆☆ (3/5)</div>
-            <a href="https://www.google.com/search?q=${encodeURIComponent(input)}" target="_blank">Ver produto</a>
-        </div>
-    `;
-}
+    searchButton.addEventListener("click", () => {
+        const term = searchInput.value.trim();
+        if (term !== "") {
+            renderResults(term);
+        }
+    });
+
+    searchInput.addEventListener("keydown", function(e) {
+        if (e.key === "Enter") {
+            searchButton.click();
+        }
+    });
+});

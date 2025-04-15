@@ -1,27 +1,25 @@
-
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Busque produtos com o melhor preço. Compare lojas como Amazon, Shopee e Magazine Luiza.">
-    <meta name="keywords" content="busca, produtos, descontos, amazon, shopee, magazine luiza">
-    <meta name="author" content="Buscadescontos">
     <title>BuscaDescontos</title>
-    <link rel="stylesheet" href="style.css">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3944571997717470" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
     <header>
-        <h1>🛒 BuscaDescontos</h1>
-        <p>Encontre o melhor preço nas maiores lojas do Brasil!</p>
+        <h1>Encontre o melhor preço nas maiores lojas do Brasil!</h1>
     </header>
+
     <main>
         <div class="search-box">
-            <input type="text" id="search-input" placeholder="O que você está procurando?">
-            <button onclick="searchProduct()">Buscar</button>
+            <input type="text" id="searchInput" placeholder="Digite o nome do produto...">
+            <button id="searchButton">Buscar</button>
         </div>
         <div id="adsense-box">
+            <!-- Google AdSense -->
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3944571997717470" crossorigin="anonymous"></script>
             <ins class="adsbygoogle"
                 style="display:block"
                 data-ad-client="ca-pub-3944571997717470"
@@ -34,9 +32,9 @@
         </div>
         <div id="results"></div>
     </main>
+
     <footer>
-        <p>&copy; 2025 BuscaDescontos - Todos os direitos reservados.</p>
+        <p>© 2025 BuscaDescontos - Todos os direitos reservados.</p>
     </footer>
-    <script src="script.js"></script>
 </body>
 </html>
