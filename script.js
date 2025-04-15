@@ -1,65 +1,39 @@
 
-function buscar() {
-  const termo = document.getElementById("searchInput").value.trim();
-  const resultados = document.getElementById("resultados");
-  resultados.innerHTML = "";
+function search() {
+    const input = document.getElementById("searchInput").value.trim();
+    if (input === "") return;
 
-  if (!termo) {
-    alert("Digite o nome de um produto.");
-    return;
-  }
+    const encoded = encodeURIComponent(input);
+    const baseGoogle = "https://www.google.com/search?q=";
+    const query = `${encoded}+site:magazineluiza.com.br+OR+site:amazon.com.br+OR+site:shopee.com.br+OR+site:mercadolivre.com.br`;
+    const url = baseGoogle + query;
 
-  const lojas = [
-    {
-      nome: "Amazon",
-      preco: "R$ 2050,00",
-      estrelas: 3.5,
-      url: `https://www.amazon.com.br/s?k=${encodeURIComponent(termo)}`
-    },
-    {
-      nome: "Shopee",
-      preco: "R$ 1999,00",
-      estrelas: 4.0,
-      url: `https://shopee.com.br/search?keyword=${encodeURIComponent(termo)}`
-    },
-    {
-      nome: "Magalu",
-      preco: "R$ 2150,00",
-      estrelas: 4.2,
-      url: `https://www.magazineluiza.com.br/busca/${encodeURIComponent(termo)}`
-    },
-    {
-      nome: "Americanas",
-      preco: "R$ 2099,00",
-      estrelas: 3.8,
-      url: `https://www.americanas.com.br/busca/${encodeURIComponent(termo)}`
-    },
-    {
-      nome: "Mercado Livre",
-      preco: "R$ 2020,00",
-      estrelas: 4.3,
-      url: `https://lista.mercadolivre.com.br/${encodeURIComponent(termo)}`
+    window.open(url, "_blank");
+
+    // Salva no histórico
+    let history = JSON.parse(localStorage.getItem("searchHistory") || "[]");
+    if (!history.includes(input)) {
+        history.unshift(input);
+        if (history.length > 10) history.pop();
+        localStorage.setItem("searchHistory", JSON.stringify(history));
     }
-  ];
-
-  lojas.forEach((loja) => {
-    const div = document.createElement("div");
-    div.className = "resultado";
-    div.innerHTML = \`
-      <h3>${termo} - Oferta ${loja.nome}</h3>
-      <p>${loja.preco}</p>
-      <p>${renderEstrelas(loja.estrelas)} (${loja.estrelas}/5)</p>
-      <a href="${loja.url}" target="_blank">Ver produto</a>
-    \`;
-    resultados.appendChild(div);
-  });
+    renderHistory();
 }
 
-function renderEstrelas(nota) {
-  const estrelasCheias = Math.floor(nota);
-  const meiaEstrela = nota % 1 >= 0.5;
-  let estrelas = "★".repeat(estrelasCheias);
-  if (meiaEstrela) estrelas += "½";
-  estrelas += "☆".repeat(5 - estrelasCheias - (meiaEstrela ? 1 : 0));
-  return estrelas;
+function renderHistory() {
+    const historyContainer = document.getElementById("history");
+    const history = JSON.parse(localStorage.getItem("searchHistory") || "[]");
+    historyContainer.innerHTML = "<h3>Histórico de buscas:</h3>" + history.map(item => `<div>${item}</div>`).join("");
 }
+
+function clearHistory() {
+    localStorage.removeItem("searchHistory");
+    renderHistory();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    renderHistory();
+    document.getElementById("searchInput").addEventListener("keydown", (e) => {
+        if (e.key === "Enter") search();
+    });
+});

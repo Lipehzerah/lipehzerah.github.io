@@ -1,24 +1,34 @@
 
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Busca Descontos</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Compare preços em várias lojas com o BuscaDesconto!">
+    <meta name="keywords" content="busca, desconto, preços, comparação, Amazon, Magalu, Shopee, Mercado Livre">
+    <meta name="robots" content="index, follow">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <title>BuscaDesconto</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3944571997717470" crossorigin="anonymous"></script>
 </head>
 <body>
-  <header>
-    <h1>Encontre o melhor preço nas maiores lojas do Brasil!!</h1>
-  </header>
-
-  <main>
-    <input type="text" id="searchInput" placeholder="Digite o nome do produto...">
-    <button onclick="buscar()">Buscar</button>
-
-    <div id="resultados"></div>
-  </main>
-
-  <script src="script.js"></script>
+    <div class="container">
+        <h1>BuscaDesconto</h1>
+        <input type="text" id="searchInput" placeholder="Digite o nome do produto...">
+        <button onclick="search()">Buscar</button>
+        <button onclick="clearHistory()">Limpar Histórico</button>
+        <div id="history"></div>
+        <div class="adsense-space">
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-3944571997717470"
+                data-ad-slot="3785423066"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>

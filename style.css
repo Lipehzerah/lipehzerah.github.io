@@ -1,50 +1,43 @@
 
 body {
-  font-family: Arial, sans-serif;
-  background-color: #eaffec;
-  margin: 0;
-  padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #e8f5e9;
+    color: #1b5e20;
+    margin: 0;
+    padding: 0;
 }
-
-header {
-  background-color: #2e8b57;
-  color: white;
-  padding: 20px;
-  text-align: center;
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 128, 0, 0.2);
+    text-align: center;
 }
-
-main {
-  max-width: 800px;
-  margin: 30px auto;
-  padding: 20px;
-  text-align: center;
-}
-
 input[type="text"] {
-  width: 60%;
-  padding: 10px;
-  font-size: 16px;
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 2px solid #4caf50;
+    border-radius: 10px;
+    font-size: 16px;
 }
-
 button {
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #2e8b57;
-  color: white;
-  border: none;
-  cursor: pointer;
+    padding: 10px 20px;
+    background-color: #4caf50;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    margin: 5px;
 }
-
-.resultado {
-  background-color: white;
-  margin: 15px 0;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 0 8px rgba(0,0,0,0.1);
-  text-align: left;
+button:hover {
+    background-color: #388e3c;
 }
-
-a {
-  color: blue;
-  text-decoration: underline;
+#history {
+    margin-top: 20px;
+}
+.adsense-space {
+    margin-top: 30px;
 }
