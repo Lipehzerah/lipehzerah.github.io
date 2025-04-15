@@ -1,26 +1,56 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const input = document.getElementById("searchInput");
-  const button = document.getElementById("searchBtn");
-  const resultsDiv = document.getElementById("results");
 
-  const search = () => {
-    const term = input.value.trim();
-    if (!term) return;
+document.addEventListener("DOMContentLoaded", function () {
+    const input = document.getElementById("searchInput");
+    const button = document.getElementById("searchButton");
+    const clearButton = document.getElementById("clearHistory");
+    const results = document.getElementById("results");
+    const historyBox = document.getElementById("historyBox");
 
-    resultsDiv.innerHTML = '<p>Buscando resultados, aguarde...</p>';
-    const query = \`\${term} site:amazon.com.br OR site:magazineluiza.com.br OR site:mercadolivre.com.br preço\`;
+    // Load history
+    const history = JSON.parse(localStorage.getItem("history") || "[]");
+    if (history.length) renderHistory(history);
 
-    window.open("https://www.google.com/search?q=" + encodeURIComponent(query), "_blank");
+    // Search function
+    function search() {
+        const query = input.value.trim();
+        if (!query) return;
 
-    const history = JSON.parse(localStorage.getItem("searchHistory") || "[]");
-    if (!history.includes(term)) {
-      history.push(term);
-      localStorage.setItem("searchHistory", JSON.stringify(history));
+        const googleQuery = `${query} site:amazon.com.br OR site:magazineluiza.com.br OR site:mercadolivre.com.br preço`;
+        const searchURL = "https://www.google.com/search?q=" + encodeURIComponent(googleQuery);
+
+        // Save to history
+        if (!history.includes(query)) {
+            history.unshift(query);
+            if (history.length > 10) history.pop();
+            localStorage.setItem("history", JSON.stringify(history));
+        }
+
+        renderHistory(history);
+
+        // Show results
+        results.innerHTML = \`<p>Buscando por: <strong>\${query}</strong>...</p><iframe src="\${searchURL}" width="100%" height="600px"></iframe>\`;
     }
-  };
 
-  button.addEventListener("click", search);
-  input.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") search();
-  });
+    // Event listeners
+    button.addEventListener("click", search);
+    input.addEventListener("keypress", function (e) {
+        if (e.key === "Enter") search();
+    });
+    clearButton.addEventListener("click", function () {
+        localStorage.removeItem("history");
+        historyBox.innerHTML = "";
+    });
+
+    function renderHistory(items) {
+        historyBox.innerHTML = "";
+        items.forEach(item => {
+            const btn = document.createElement("button");
+            btn.textContent = item;
+            btn.onclick = () => {
+                input.value = item;
+                search();
+            };
+            historyBox.appendChild(btn);
+        });
+    }
 });
