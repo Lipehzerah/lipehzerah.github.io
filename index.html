@@ -1,40 +1,24 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BuscaDescontos</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Busca Descontos</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <header>
-        <h1>Encontre o melhor preço nas maiores lojas do Brasil!</h1>
-    </header>
+  <header>
+    <h1>Encontre o melhor preço nas maiores lojas do Brasil!!</h1>
+  </header>
 
-    <main>
-        <div class="search-box">
-            <input type="text" id="searchInput" placeholder="Digite o nome do produto...">
-            <button id="searchButton">Buscar</button>
-        </div>
-        <div id="adsense-box">
-            <!-- Google AdSense -->
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3944571997717470" crossorigin="anonymous"></script>
-            <ins class="adsbygoogle"
-                style="display:block"
-                data-ad-client="ca-pub-3944571997717470"
-                data-ad-slot="3785423066"
-                data-ad-format="auto"
-                data-full-width-responsive="true"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-        <div id="results"></div>
-    </main>
+  <main>
+    <input type="text" id="searchInput" placeholder="Digite o nome do produto...">
+    <button onclick="buscar()">Buscar</button>
 
-    <footer>
-        <p>© 2025 BuscaDescontos - Todos os direitos reservados.</p>
-    </footer>
+    <div id="resultados"></div>
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>

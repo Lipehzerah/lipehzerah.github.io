@@ -1,61 +1,50 @@
 
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background-color: #f0fff0;
-    color: #333;
+  font-family: Arial, sans-serif;
+  background-color: #eaffec;
+  margin: 0;
+  padding: 0;
 }
 
 header {
-    background-color: #2e8b57;
-    color: white;
-    padding: 1rem;
-    text-align: center;
+  background-color: #2e8b57;
+  color: white;
+  padding: 20px;
+  text-align: center;
 }
 
-.search-box {
-    display: flex;
-    justify-content: center;
-    margin: 2rem 0;
+main {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 20px;
+  text-align: center;
 }
 
-.search-box input {
-    width: 300px;
-    padding: 0.5rem;
-    font-size: 1rem;
+input[type="text"] {
+  width: 60%;
+  padding: 10px;
+  font-size: 16px;
 }
 
-.search-box button {
-    padding: 0.5rem 1rem;
-    margin-left: 0.5rem;
-    background-color: #2e8b57;
-    color: white;
-    border: none;
-    cursor: pointer;
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #2e8b57;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
 
-#adsense-box {
-    margin: 2rem auto;
-    max-width: 728px;
-    text-align: center;
+.resultado {
+  background-color: white;
+  margin: 15px 0;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  text-align: left;
 }
 
-#results {
-    padding: 1rem;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.product {
-    border: 1px solid #ddd;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    background-color: white;
-}
-
-footer {
-    text-align: center;
-    padding: 1rem;
-    background-color: #2e8b57;
-    color: white;
+a {
+  color: blue;
+  text-decoration: underline;
 }
