@@ -1,21 +1,53 @@
 
 function searchProduct() {
-  const query = document.getElementById("searchBox").value;
-  if (!query) return alert("Digite algo para buscar!");
-  const cx = 'YOUR_CX'; // Substitua pelo seu CSE ID
-  const key = 'YOUR_API_KEY'; // Substitua pela sua API KEY
-  const url = `https://www.googleapis.com/customsearch/v1?key=${key}&cx=${cx}&q=${query}`;
+  const query = document.getElementById('searchInput').value.trim();
+  if (query === '') return;
 
-  fetch(url)
+  saveSearchHistory(query);
+  const resultsDiv = document.getElementById("results");
+  resultsDiv.innerHTML = `<p>Buscando por "${query}"...</p>`;
+
+  fetch(`https://www.googleapis.com/customsearch/v1?q=${encodeURIComponent(query + " site:amazon.com.br OR site:magazineluiza.com.br OR site:mercadolivre.com.br OR site:shopee.com.br")}&key=YOUR_API_KEY&cx=YOUR_CX_ID`)
     .then(response => response.json())
     .then(data => {
-      const container = document.getElementById("results");
-      container.innerHTML = "";
+      resultsDiv.innerHTML = "";
+      if (!data.items) {
+        resultsDiv.innerHTML = "<p>Nenhum resultado encontrado.</p>";
+        return;
+      }
       data.items.forEach(item => {
-        const div = document.createElement("div");
-        div.innerHTML = `<strong>${item.title}</strong><br><a href="${item.link}" target="_blank">${item.link}</a><p>${item.snippet}</p><hr>`;
-        container.appendChild(div);
+        const priceMatch = item.snippet.match(/R\$\s?\d+[.,]?\d*/);
+        const price = priceMatch ? priceMatch[0] : "Preço não encontrado";
+        resultsDiv.innerHTML += `
+          <div>
+            <h3><a href="${item.link}" target="_blank">${item.title}</a></h3>
+            <p>${price}</p>
+            <p>${item.snippet}</p>
+          </div>
+          <hr>
+        `;
       });
     })
-    .catch(error => console.error("Erro ao buscar:", error));
+    .catch(error => {
+      resultsDiv.innerHTML = "<p>Erro ao buscar resultados.</p>";
+      console.error(error);
+    });
+}
+
+function handleKey(event) {
+  if (event.key === "Enter") {
+    searchProduct();
+  }
+}
+
+function saveSearchHistory(query) {
+  let history = JSON.parse(localStorage.getItem("searchHistory")) || [];
+  if (!history.includes(query)) {
+    history.unshift(query);
+    localStorage.setItem("searchHistory", JSON.stringify(history.slice(0, 10)));
+  }
+}
+
+function clearHistory() {
+  localStorage.removeItem("searchHistory");
 }
