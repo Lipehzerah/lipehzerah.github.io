@@ -1,4 +1,3 @@
-
 User-agent: *
-Allow: /
-Sitemap: https://lipehzerah.github.io/buscadescontos/sitemap.xml
+Disallow:
+Sitemap: https://www.seusite.com/sitemap.xml
